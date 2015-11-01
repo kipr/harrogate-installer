@@ -42,28 +42,6 @@ update_tar()
 	echo "${2} is now up-to-date."
 }
 
-
-update_svn()
-{
-	echo "--------------------------------------------------------------------------------"
-	echo "Update ${2}"
-	local repo=$1
-	local name=$2
-	if [ ! -d $2 ]; then
-		${SVN} co ${1}
-	else
-		local wd=${PWD}
-		cd "$2"
-		${SVN} up
-		cd ${wd}
-	fi
-	if [ "$?" -ne "0" ]; then
-		echo "Updating svn repository ${1} failed."
-		exit 1
-	fi
-	echo "${2} is now up-to-date."
-}
-
 #########################
 # Fetch !              #
 #########################
