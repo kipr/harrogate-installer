@@ -98,30 +98,6 @@ build_cmake()
 	cd -
 }
 
-build_make()
-{
-	local folder=$1
-	local install=$2
-	local options=$3
-	local wd=${PWD}
-	
-	cd ${folder}
-	make -j1 ${options}
-	if [ "$?" -ne "0" ]; then
-		echo "make for ${1} failed."
-		exit 1
-	fi
-	
-	if [[ "${install}" -eq "1" ]]; then
-		make ${options} install
-		if [ "$?" -ne "0" ]; then
-			echo "make install for ${1} failed."
-			exit 1
-		fi
-	fi
-	cd ${wd}
-}
-
 run_npm()
 {
 	local folder=$1
