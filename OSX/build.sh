@@ -62,37 +62,6 @@ build_boost()
         cd "${wd}"
 }
 
-build_autotools()
-{
-	echo "--------------------------------------------------------------------------------"
-	echo "Build ${1}"
-	local folder=$1
-	local install=$2
-	local options=$3
-	local wd=${PWD}
-	cd "${wd}/${folder}"
-	echo "./configure ${options}"
-	./configure ${options}
-	if [ "$?" -ne "0" ]; then
-		echo "cmake for ${1} failed."
-		exit 1
-	fi
-	make -j4
-	if [ "$?" -ne "0" ]; then
-		echo "make for ${1} failed."
-		exit 1
-	fi
-	
-	if [[ "${install}" -eq "1" ]]; then
-		make install
-		if [ "$?" -ne "0" ]; then
-			echo "make install for ${1} failed."
-			exit 1
-		fi
-	fi
-	cd "${wd}"
-}
-
 build_cmake()
 {
 	echo "--------------------------------------------------------------------------------"
