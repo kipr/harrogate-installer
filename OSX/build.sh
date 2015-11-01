@@ -126,14 +126,4 @@ build_cmake libaurora 1 "-DCMAKE_INCLUDE_PATH=${INSTALL}/include -DCMAKE_LIBRARY
 run_npm harrogate "${PWD}/node-v0.10.40-darwin-x64/bin/npm" "install"
 run_npm harrogate "${PWD}/node-v0.10.40-darwin-x64/bin/npm" "run compile"
 
-cp -r harrogate "${INSTALL}/../"
-cp -r node-v0.10.40-darwin-x64/* "${INSTALL}/"
-
-echo "#!/usr/bin/env bash
-
-cd ${INSTALL}/../harrogate/
-
-${INSTALL}/bin/node server.js" > "${INSTALL}/../Start KISS IDE Server.command"
-chmod a+x "${INSTALL}/../Start KISS IDE Server.command"
-
 exit 0
