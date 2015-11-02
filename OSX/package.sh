@@ -44,5 +44,7 @@ cp -r node-v0.10.40-darwin-x64/* "${INSTALL_DIR}/"
 INSTALL_DEST="/opt/KIPR/KIPR-Software-Suite-${VERSION}"
 echo "#!/usr/bin/env bash
 
-${INSTALL_DEST}/shared/bin/node ${INSTALL_DEST}/harrogate/server.js" > "${PKG_DIR}/Start KISS IDE Server.command"
+cd ${INSTALL_DEST}/harrogate/
+
+${INSTALL_DEST}/shared/bin/node server.js" > "${PKG_DIR}/Start KISS IDE Server.command"
 chmod a+x "${PKG_DIR}/Start KISS IDE Server.command"
