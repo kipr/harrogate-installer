@@ -19,10 +19,30 @@
 
 #!/bin/sh
 
-cp -r harrogate "${INSTALL}/../"
-cp -r node-v0.10.40-darwin-x64/* "${INSTALL}/"
+APP_MAJOR_VERSION="1"
+APP_MINOR_VERSION="0"
+BUILD_NUMBER="28"
 
-cd ${INSTALL}/../harrogate/
+VERSION="${APP_MAJOR_VERSION}.${APP_MINOR_VERSION}.${BUILD_NUMBER}"
 
-${INSTALL}/bin/node server.js > "${INSTALL}/../Start KISS IDE Server.command"
-chmod a+x "${INSTALL}/../Start KISS IDE Server.command"
+if [ "$1" != "" ]; then
+  ROOT_DIR=$1
+else
+  echo "WARNING: No root directory given; using current directory"
+  ROOT_DIR=${PWD}
+fi
+
+PKG_DIR=${ROOT_DIR}/KIPR-Software-Suite-${VERSION}
+mkdir -p ${PKG_DIR}
+
+INSTALL_DIR=${PKG_DIR}/shared
+mkdir -p ${INSTALL_DIR}
+
+cp -r harrogate "${PKG_DIR}/"
+cp -r node-v0.10.40-darwin-x64/* "${INSTALL_DIR}/"
+
+INSTALL_DEST="/opt/KIPR/KIPR-Software-Suite-${VERSION}"
+echo "#!/usr/bin/env bash
+
+${INSTALL_DEST}/shared/bin/node ${INSTALL_DEST}/harrogate/server.js" > "${PKG_DIR}/Start KISS IDE Server.command"
+chmod a+x "${PKG_DIR}/Start KISS IDE Server.command"
