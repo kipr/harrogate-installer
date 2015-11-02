@@ -25,11 +25,21 @@ BUILD_NUMBER="28"
 
 VERSION="${APP_MAJOR_VERSION}.${APP_MINOR_VERSION}.${BUILD_NUMBER}"
 
-BUILD=${PWD}/build
-mkdir -p ${BUILD}
+if [ "$1" != "" ]; then
+  ROOT_DIR=$1
+else
+  echo "WARNING: No root directory given; using current directory"
+  ROOT_DIR=${PWD}
+fi
 
-INSTALL=/opt/KIPR/KIPR-Software-Suite-${VERSION}/shared
-mkdir -p ${INSTALL}
+BUILD_DIR=${ROOT_DIR}/build
+mkdir -p ${BUILD_DIR}
+
+PKG_DIR=${ROOT_DIR}/KIPR-Software-Suite-${VERSION}
+mkdir -p ${PKG_DIR}
+
+INSTALL_DIR=${PKG_DIR}/shared
+mkdir -p ${INSTALL_DIR}
 
 build_boost()
 {
@@ -69,9 +79,9 @@ build_cmake()
 	local folder=$1
 	local install=$2
 	local options=$3
-	mkdir -p ${BUILD}/${folder}
+	mkdir -p ${BUILD_DIR}/${folder}
 	local wd=${PWD}
-	cd ${BUILD}/${folder}
+	cd ${BUILD_DIR}/${folder}
 	if [[ $(uname -s) == MINGW* ]] ;
 	then
 		QTDIR=/c/Qt cmake ${wd}/${folder} -G "MSYS Makefiles" "-DDIRECTX=/c/Program Files/Microsoft DirectX SDK (June 2010)" --no-warn-unused-cli ${options}
@@ -118,12 +128,12 @@ run_npm()
 # Build!                #
 #########################
 
-build_boost boost_1_58_0 1 "--prefix=${BUILD}"
-build_cmake libbson 1 "-DCMAKE_INSTALL_PREFIX=${INSTALL}"
-build_cmake daylite 1 "-DBOOST_INCLUDE_DIR=${BUILD}/include -DCMAKE_LIBRARY_PATH=${BUILD}/lib:{INSTALL}/lib -DLIBBSON_INCLUDE_DIR=${INSTALL}/include/libbson-1.0 -DCMAKE_INSTALL_PREFIX=${INSTALL}"
-build_cmake libpng-1.6.18 1 "-DCMAKE_INSTALL_PREFIX=${INSTALL}"
-build_cmake libaurora 1 "-DCMAKE_INCLUDE_PATH=${INSTALL}/include -DCMAKE_LIBRARY_PATH=${INSTALL}/lib -DLIBBSON_INCLUDE_DIR=${INSTALL}/include/libbson-1.0 -DCMAKE_INSTALL_PREFIX=${INSTALL}"
-run_npm harrogate "${PWD}/node-v0.10.40-darwin-x64/bin/npm" "install"
-run_npm harrogate "${PWD}/node-v0.10.40-darwin-x64/bin/npm" "run compile"
+build_boost boost_1_58_0 1 "--prefix=${BUILD_DIR}"
+build_cmake libbson 1 "-DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}"
+build_cmake daylite 1 "-DBOOST_INCLUDE_DIR=${BUILD_DIR}/include -DCMAKE_LIBRARY_PATH=${BUILD_DIR}/lib:{INSTALL_DIR}/lib -DLIBBSON_INCLUDE_DIR=${INSTALL_DIR}/include/libbson-1.0 -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}"
+build_cmake libpng-1.6.18 1 "-DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}"
+build_cmake libaurora 1 "-DLIBBSON_INCLUDE_DIR=${INSTALL_DIR}/include/libbson-1.0 -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}"
+run_npm harrogate "${ROOT_DIR}/node-v0.10.40-darwin-x64/bin/npm" "install"
+run_npm harrogate "${ROOT_DIR}/node-v0.10.40-darwin-x64/bin/npm" "run compile"
 
 exit 0
