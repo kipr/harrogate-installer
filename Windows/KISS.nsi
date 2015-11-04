@@ -7,8 +7,8 @@
 ; Define KIPR application name and version number
 !define APP_NAME "KIPR Software Suite"
 !define APP_MAJOR_VERSION "1"
-!define APP_MINOR_VERSION "0"
-!define BUILD_NUMBER "30"
+!define APP_MINOR_VERSION "1"
+!define BUILD_NUMBER "4"
 
 ; Standard Release app name and version
 !define VERSION "${APP_MAJOR_VERSION}.${APP_MINOR_VERSION}.${BUILD_NUMBER}"
