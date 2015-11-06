@@ -129,7 +129,6 @@ run_npm()
 #########################
 
 build_boost boost_1_58_0 1 "--prefix=${BUILD_DIR}"
-./libbson/autogen.sh
 build_cmake libbson 1 "-DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}"
 build_cmake daylite 1 "-DBOOST_INCLUDE_DIR=${BUILD_DIR}/include -DCMAKE_LIBRARY_PATH=${BUILD_DIR}/lib:{INSTALL_DIR}/lib -DLIBBSON_INCLUDE_DIR=${INSTALL_DIR}/include/libbson-1.0 -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}"
 build_cmake libpng-1.6.18 1 "-DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}"
