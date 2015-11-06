@@ -132,7 +132,7 @@ build_boost boost_1_58_0 1 "--prefix=${BUILD_DIR}"
 build_cmake libbson 1 "-DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}"
 build_cmake daylite 1 "-DBOOST_INCLUDE_DIR=${BUILD_DIR}/include -DCMAKE_LIBRARY_PATH=${BUILD_DIR}/lib:{INSTALL_DIR}/lib -DLIBBSON_INCLUDE_DIR=${INSTALL_DIR}/include/libbson-1.0 -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}"
 build_cmake libpng-1.6.18 1 "-DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}"
-build_cmake libaurora 1 "-DLIBBSON_INCLUDE_DIR=${INSTALL_DIR}/include/libbson-1.0 -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}"
+build_cmake libaurora 1 "-DLIBBSON_INCLUDE_DIR=${INSTALL_DIR}/include/libbson-1.0 -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR} -DPNG_INCLUDE_DIR=${INSTALL_DIR}/include -DPNG_LIBRARY=${INSTALL_DIR}/lib/libpng.dylib"
 run_npm harrogate "${ROOT_DIR}/node-v0.10.40-darwin-x64/bin/npm" "install"
 run_npm harrogate "${ROOT_DIR}/node-v0.10.40-darwin-x64/bin/npm" "run compile"
 
