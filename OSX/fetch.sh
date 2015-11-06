@@ -1,8 +1,6 @@
 #!/bin/sh
 
 GIT=git
-HG=hg
-SVN=svn
 
 update_git()
 {
