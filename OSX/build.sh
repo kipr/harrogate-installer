@@ -128,8 +128,6 @@ run_npm()
 # Build!                #
 #########################
 
-build_boost boost_1_58_0 1 "--prefix=${BUILD_DIR}"
-
 # libbson
 cd ${ROOT_DIR}/libbson
 ./configure
