@@ -1,6 +1,6 @@
 # harrogate-installer
 
-This repository includes the scripts and resources necessary to build and package [harrogate](). Currently, it supports OS X and Windows.
+This repository includes the scripts and resources necessary to build and package [harrogate](https://github.com/kipr/harrogate). Currently, it supports OS X and Windows.
 
 ### Steps for Packaging
 
