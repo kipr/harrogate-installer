@@ -41,37 +41,6 @@ mkdir -p ${PKG_DIR}
 INSTALL_DIR=${PKG_DIR}/shared
 mkdir -p ${INSTALL_DIR}
 
-build_boost()
-{
-	echo "--------------------------------------------------------------------------------"
-	echo "Build ${1}"
-	local folder=$1
-	local install=$2
-	local options=$3
-	local wd=${PWD}
-	cd "${wd}/${folder}"
-	echo ".bootstrap.sh ${options}"
-	./bootstrap.sh ${options}
-	if [ "$?" -ne "0" ]; then
-		echo "bootstrap ${folder} failed."
-		exit 1
-	fi
-	./b2 -j4
-	if [ "$?" -ne "0" ]; then
-                echo "./b2 for ${1} failed."
-                exit 1
-        fi
-
-        if [[ "${install}" -eq "1" ]]; then
-                ./b2 install
-                if [ "$?" -ne "0" ]; then
-                        echo "./b2 install for ${1} failed."
-                        exit 1
-                fi
-        fi
-        cd "${wd}"
-}
-
 build_cmake()
 {
 	echo "--------------------------------------------------------------------------------"
