@@ -45,7 +45,7 @@ update_tar()
 #########################
 
 update_tar http://sourceforge.net/projects/boost/files/boost/1.58.0/boost_1_58_0.tar.bz2/download boost_1_58_0
-update_git https://github.com/mongodb/libbson.git libbson
+update_tar https://github.com/mongodb/libbson/releases/download/1.2.1/libbson-1.2.1.tar.gz libbson
 update_git https://github.com/kipr/daylite.git daylite
 update_tar http://download.sourceforge.net/libpng/libpng-1.6.18.tar.gz libpng-1.6.18
 update_git https://github.com/kipr/libaurora.git libaurora
